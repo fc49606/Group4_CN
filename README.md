@@ -13,8 +13,10 @@ To organize the data, first run the following files:
 
     ```python3 AUXILIAR.py
     ```
+    
     ```python3 AUXILIAR2.py
     ```
+    
     ```python3 AUXILIAR3.py
     ```
 
@@ -23,12 +25,16 @@ NOTE: run all the files by this order
 
     ```python3 create_movies_bd.py
     ```
+    
     ```python3 create_streaming_bd.py
     ```
+    
     ```python3 populate_movies_metadata.py
     ```
+    
     ```python3 populate_movies_ratings.py
     ```
+    
     ```python3 populate_movies_streaming_plataforms.py
     ```
 

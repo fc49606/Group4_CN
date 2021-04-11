@@ -19,6 +19,7 @@ To organize the data, first run the following files:
     ```
 
 Now to create and populate our data run the scripts (install any modules missing using python -m pip install SOMEPACKAGE):
+NOTE: run all the files by this order 
 
     ```python3 create_movies_bd.py
     ```

@@ -1,0 +1,41 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.2"
+  title: ISP Statistics API
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /budget/{title}/{year}/: #Use Case 1 - Find Movie by year and platform
+    get:
+      operationId: budget.read
+      tags:
+        - Current Movie Data
+      summary: "Call current list of movies on the streaming platform"
+      description: "Access current movie data including over 450,000 movies! Current movie data is frequently updated."
+      parameters:
+        - name: title
+          in: path
+          required: True
+          type: string
+          description: year of release
+        - name: year
+          in: path
+          required: True
+          type: string
+          description: platform that contains the movie
+      responses:
+        200:
+          description: Successfully response
+          schema:
+            type: object
+            properties:
+              titulo:
+                type: number
+                description: Title of the movie

@@ -1,0 +1,81 @@
+openapi: "3.0.2"
+info:
+  title: "Movie budget API"
+  description: "This is a sample server that you can obtain information's about the movies budget"
+
+tags:
+- name: "Current Movie Data"
+  description: "Current information about the movies"
+
+paths:
+  
+  /budget:
+    get:
+      tags:
+      - "Current Movie Data"
+      summary: "Call current budget for one movie"
+      description: "Access current movie data including over 450,000 movies! Current movie data is frequently updated."
+      operationId: CurrentMovieData3
+      parameters:
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/year'
+        
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budget'
+              
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Budget not found
+                type: string
+                example: Not found
+              
+components:
+
+  parameters:
+    title:
+      name: title
+      in: query
+      description: "**Movie title**. *Example: Toy Storie*. You can call by the movie titleans the API responds with a list of results that match a searching word."
+      schema:
+        type: string
+
+    year:
+      name: year
+      in: query
+      description: "**Realese date**. *Example: 2001*. You can call by movie year. The API responds with the list of movies realesed in that year."
+      schema:
+        type: string
+
+    budget:
+      name: budget
+      in: query
+      description: '**budget**. *Example: dollar*. Monye spend for making the movie.'
+      schema:
+        type: string
+        enum: [euro, dollar]
+        default: "dollar"
+        
+  schemas:
+            
+    Budget:
+      type: object
+      properties:
+        budget:
+          type: integer
+          items:
+            $ref: '#/components/schemas/GetBudget'
+          
+    GetBudget:
+      properties:
+        rating:
+          type: number
+          description: Budget of the selected Movie
+          example: 1300000

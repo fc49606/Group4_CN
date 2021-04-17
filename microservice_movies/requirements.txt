@@ -1,5 +1,0 @@
-flask
-flask_restful
-connexion
-psycopg2
-postgres

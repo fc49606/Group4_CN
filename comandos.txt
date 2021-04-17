@@ -1,3 +1,5 @@
+**Criar os micro-serviços no Cloud run e obter as imagens no Countainer Registry**
+
 ---microservice_movies---
 
 gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
@@ -22,6 +24,8 @@ gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-rating
 gcloud run deploy microservice-ratings --image eu.gcr.io/cn2021-kubernetes-colab/microservice-ratings
 gcloud run services update microservice-ratings --add-cloudsql-instances cn2021-kubernetes-colab:europe-west2:database-g04 --set-env-vars CLOUD_SQL_CONNECTION_NAME=cn2021-kubernetes-colab:europe-west2:database-g04,DB_USER=postgres,DB_PASS=root,DB_NAME=movies
 
+
+**Criar um cluster no Kubernets com 4 nodes, dar deploy das imagens contidas no Countainer Registry, dar deploy de um LoadBalancer, para no fim obter o ip do micro-serviço com o (kubectl get service <Service>)
 
 ---kubernets---
 

@@ -25,11 +25,12 @@ paths:
           required: True
           type: string
           description: year of release
+      responses:  
         200:
-          description: Successfully response
-          schema:
-            type: object
-            properties:
-              titulo:
-                type: number
-                description: Title of the movie
+        description: Successfully response
+        schema:
+          type: object
+          properties:
+            titulo:
+              type: number
+              description: Title of the movie

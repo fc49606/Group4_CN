@@ -9,7 +9,6 @@ From this [dataset](https://www.kaggle.com/rounakbanik/the-movies-dataset?select
 Once finished the download, make sure to put the files on the Create_and_Populate_Database folder:
 
 To organize the data, and to create and populate our data run the following line (install any modules missing using python -m pip install SOMEPACKAGE):
-
     ```./create_and_populate.sh
     ```
 This operation should take several minutes to complete.
@@ -17,7 +16,6 @@ This operation should take several minutes to complete.
 ## Create the clusters
 
 Create the GKE cluster, you can do the next step in parallel if you so desire:
-
     ```gcloud container clusters create gk-cluster --num-nodes 1 --machine-type n1-standard-1 --zone europe-west2-b
     ```
 Note: this may take a few minutes to complete 
@@ -26,7 +24,6 @@ After you created a cluster, then go to IAM ADMIN, service acount and finaly cre
 Go to keys and create one e then download ir as .json, name it key and place it on the project folder.
 
 To create a secret run:
-
     ```gcloud iam service-accounts keys create key.json --iam-account cn-projeto@cn2021-kubernetes-colab.iam.gserviceaccount.com
     ```
 and
@@ -34,16 +31,15 @@ and
     ```
  
 ##Important note
+
 On every XXX-with-proxy.yaml maku sure that you have your project-id and the id of your SQL Database
 
 ## Deploy the microservices to the cluster
-    
     ```./create_services.sh
     ```
     
 Note: this may take a few minutes to complete
     
 ## Delete the microservices 
-    
     ```./delete_services.sh
     ```

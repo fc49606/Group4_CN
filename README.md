@@ -33,6 +33,9 @@ and
     ```kubectl create secret generic sa-secret --from-file=service_account.json=key.json
     ```
  
+##Important note
+On every XXX-with-proxy.yaml maku sure that you have your project-id and the id of your SQL Database
+
 ## Deploy the microservices to the cluster
     
     ```./create_services.sh

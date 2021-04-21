@@ -34,12 +34,16 @@ and
 
 On every XXX-with-proxy.yaml maku sure that you have your project-id and the id of your SQL Database
 
-## Deploy the microservices to the cluster
+## Deploy the microservices
+
+To deploy the microservices to a cluster run:
     ```./create_services.sh
     ```
     
 Note: this may take a few minutes to complete
     
 ## Delete the microservices 
+
+To delete all the microservices on a cluster run:
     ```./delete_services.sh
     ```

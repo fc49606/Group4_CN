@@ -1,0 +1,112 @@
+**Criar os micro-serviços no Cloud run e obter as imagens no Countainer Registry**
+
+---microservice_movies---
+
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+gcloud run deploy microservice-movies --image eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+gcloud run services update microservice-movies --add-cloudsql-instances cn2021-kubernetes-colab:europe-west2:postgres-cn --set-env-vars CLOUD_SQL_CONNECTION_NAME=cn2021-kubernetes-colab:europe-west2:postgres-cn,DB_USER=postgres,DB_PASS=root,DB_NAME=movies
+
+---microservice_budget---
+
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-budget
+gcloud run deploy microservice-budget --image eu.gcr.io/cn2021-kubernetes-colab/microservice-budget
+gcloud run services update microservice-budget --add-cloudsql-instances cn2021-kubernetes-colab:europe-west2:postgres-cn --set-env-vars CLOUD_SQL_CONNECTION_NAME=cn2021-kubernetes-colab:europe-west2:postgres-cn,DB_USER=postgres,DB_PASS=root,DB_NAME=movies
+
+---microservice_revenue---
+
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-revenue
+gcloud run deploy microservice-revenue --image eu.gcr.io/cn2021-kubernetes-colab/microservice-revenue
+gcloud run services update microservice-revenue --add-cloudsql-instances cn2021-kubernetes-colab:europe-west2:postgres-cn --set-env-vars CLOUD_SQL_CONNECTION_NAME=cn2021-kubernetes-colab:europe-west2:postgres-cn,DB_USER=postgres,DB_PASS=root,DB_NAME=movies
+
+---microservice_ratings---
+
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-ratings
+gcloud run deploy microservice-ratings --image eu.gcr.io/cn2021-kubernetes-colab/microservice-ratings
+gcloud run services update microservice-ratings --add-cloudsql-instances cn2021-kubernetes-colab:europe-west2:postgres-cn --set-env-vars CLOUD_SQL_CONNECTION_NAME=cn2021-kubernetes-colab:europe-west2:postgres-cn,DB_USER=postgres,DB_PASS=root,DB_NAME=movies
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Criar um cluster no Kubernets com 4 nodes, dar deploy das imagens contidas no Countainer Registry, dar deploy de um LoadBalancer, para no fim obter o ip do micro-serviço com o (kubectl get service <Service>)**
+
+---kubernets---
+
+gcloud auth login
+gcloud container clusters create gk-cluster --num-nodes 1 --machine-type n1-standard-1 --zone europe-west2-b
+gcloud container clusters get-credentials gk-cluster
+kubectl create deployment movie --image=eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+kubectl create deployment budget --image=eu.gcr.io/cn2021-kubernetes-colab/microservice-budget
+kubectl create deployment revenue --image=eu.gcr.io/cn2021-kubernetes-colab/microservice-revenue
+kubectl create deployment rating --image=eu.gcr.io/cn2021-kubernetes-colab/microservice-ratings
+kubectl expose deployment movie --type LoadBalancer --port 80 --target-port 8080
+kubectl expose deployment budget --type LoadBalancer --port 80 --target-port 8080
+kubectl expose deployment revenue --type LoadBalancer --port 80 --target-port 8080
+kubectl expose deployment rating --type LoadBalancer --port 80 --target-port 8080
+kubectl get pods
+kubectl get service movie
+kubectl get service budget
+kubectl get service revenue
+kubectl get service rating
+
+**Limpar o que foi criado**
+
+---kubernets(limpeza)---
+kubectl delete service movie
+kubectl delete service budget 
+kubectl delete service revenue 
+kubectl delete service rating 
+gcloud container clusters delete gk-cluster
+gcloud container images delete eu.gcr.io/cn2021-kubernetes-colab/microservice-movies --force-delete-tags --quiet
+gcloud container images delete eu.gcr.io/cn2021-kubernetes-colab/microservice-budget --force-delete-tags --quiet
+gcloud container images delete eu.gcr.io/cn2021-kubernetes-colab/microservice-revenue --force-delete-tags --quiet
+gcloud container images delete eu.gcr.io/cn2021-kubernetes-colab/microservice-ratings --force-delete-tags --quiet
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------teste_movies---------------------
+
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+kubectl create deployment movie --image=eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+kubectl scale deployment movie --replicas=3
+kubectl autoscale deployment movie --cpu-percent=80 --min=1 --max=5
+kubectl get pods
+kubectl expose deployment movie --type LoadBalancer --port 80 --target-port 8080
+kubectl get service
+
+-------------teste5545664833373119393---------------------
+
+#kubectl create secret generic secret-teste --from-literal=username=postgres  --from-literal=password=root --from-literal=database=movies_streaming_plataform
+kubectl create secret generic secret123 --from-literal=db_host=10.19.176.8
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+kubectl create -f no_proxy_private_ip.yaml
+kubectl expose deployment movie --type LoadBalancer --port 80 --target-port 8080
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------testeFinal---------------------
+#IAM e administrador e criar conta de serviço e adicionar dois papeis (cliente do Cloud SQL e Editor) e no fim criar uma chave .json. 
+gcloud iam service-accounts keys create key.json --iam-account cn-projeto@cn2021-kubernetes-colab.iam.gserviceaccount.com
+kubectl create secret generic sa-secret --from-file=service_account.json=key.json
+
+-------------testeFinalMOVIE---------------------
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-movies
+kubectl create -f movies-with-proxy.yaml
+kubectl expose deployment movie --type LoadBalancer --port 80 --target-port 8080
+kubectl get service
+
+-------------testeFinalBUDGET---------------------
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-budget
+kubectl create -f budget-with-proxy.yaml
+kubectl expose deployment budget --type LoadBalancer --port 80 --target-port 8080
+kubectl get service
+
+-------------testeFinalREVENUE---------------------
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-revenue
+kubectl create -f revenue-with-proxy.yaml
+kubectl expose deployment revenue --type LoadBalancer --port 80 --target-port 8080
+kubectl get service
+
+-------------testeFinalRATING---------------------
+gcloud builds submit --tag eu.gcr.io/cn2021-kubernetes-colab/microservice-rating
+kubectl create -f rating-with-proxy.yaml
+kubectl expose deployment rating --type LoadBalancer --port 80 --target-port 8080
+kubectl get service

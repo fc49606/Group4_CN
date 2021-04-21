@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rating
+spec:
+  selector:
+    matchLabels:
+      app: rating
+  template:
+    metadata:
+      labels:
+        app: rating
+    spec:
+      containers:
+      - name: rating-container
+        image: eu.gcr.io/cn2021-kubernetes-colab/microservice-rating
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.17
+        command:
+          - "/cloud_sql_proxy"
+          - "-instances=cn2021-kubernetes-colab:europe-west2:cn-database=tcp:5432"
+          - "-credential_file=/secrets/service_account.json"
+        securityContext:
+          runAsNonRoot: true
+        volumeMounts:
+        - name: volumekey
+          mountPath: /secrets/
+          readOnly: true
+      volumes:
+      - name: volumekey
+        secret:
+          secretName: sa-secret

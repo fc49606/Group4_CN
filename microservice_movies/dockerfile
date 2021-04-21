@@ -1,0 +1,17 @@
+FROM python 
+
+COPY . /microservice_movies
+WORKDIR /microservice_movies
+
+RUN pip install -r requirements.txt	
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
+
+#USER postgres
+EXPOSE 5432
+ENV PORT 8080
+
+ENTRYPOINT ["python"]
+CMD ["server.py"]

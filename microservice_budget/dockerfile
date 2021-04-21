@@ -1,0 +1,13 @@
+FROM python 
+
+COPY . /microservice_budget
+WORKDIR /microservice_budget
+
+RUN pip install -r requirements.txt	
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
+
+ENTRYPOINT ["python"]
+CMD ["server.py"]

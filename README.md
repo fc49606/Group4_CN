@@ -32,7 +32,7 @@ and
  
 ##Important note
 
-On every XXX-with-proxy.yaml maku sure that you have your project-id and the id of your SQL Database
+On every XXX-with-proxy.yaml make sure that you have your project-id and the id of your SQL Database
 
 ## Deploy the microservices
 

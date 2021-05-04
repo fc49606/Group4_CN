@@ -4,4 +4,4 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - 'pip install flask_restful && cd microservice_movies && python testing.py -v'
+  - 'cd microservice_movies && pip install -r requirements.txt && python testing.py -v'

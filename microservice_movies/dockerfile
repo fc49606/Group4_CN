@@ -15,4 +15,3 @@ ENV PORT 8080
 
 ENTRYPOINT ["python"]
 CMD ["server.py"]
-CMD ["testing.py"]

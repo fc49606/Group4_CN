@@ -16,7 +16,7 @@ def read(year,streamPlat):
     )
     cursor = conn.cursor()
     aux = ""
-    print("TESTE: "+streamPlat)
+    #print("TESTE: "+streamPlat)
     if streamPlat == "netflix":	
         aux +=" and netflix=1"
     if streamPlat == "hulu":
@@ -27,7 +27,7 @@ def read(year,streamPlat):
         aux+=" and disneyplus=1"
     cursor.execute("""SELECT title from streaming_plataform where year="""+year+aux)
     resposta = cursor.fetchall()
-    print("Querie correu bem")
+    #print("Querie correu bem")
     conn.close()
     return resposta
 

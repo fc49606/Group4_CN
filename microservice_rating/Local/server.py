@@ -9,38 +9,30 @@ api = Api(app)
 
 db = None
 
-def read(year,streamPlat):
-
+def read(title):
     conn = psycopg2.connect(
-        database = "movies_streaming_plataform",user = 'postgres', password='root', host='host.docker.internal',port = '5432'
+        database = "movies",user = 'postgres', password='root', host='host.docker.internal',port = '5432'
     )
     cursor = conn.cursor()
-    aux = ""
-    print("TESTE: "+streamPlat)
-    if streamPlat == "netflix":	
-        aux +=" and netflix=1"
-    if streamPlat == "hulu":
-        aux+=" and hulu=1"
-    if streamPlat == "prime_video":
-        aux+=" and prime_video=1"
-    if streamPlat == "disneyplus":
-        aux+=" and disneyplus=1"
-    cursor.execute("""SELECT title from streaming_plataform where year="""+year+aux)
+    titulo = "'"+title+"'"
+    cursor.execute("""SELECT AVG(rating) FROM movies_ratings r INNER JOIN movies_metadata ON  r.movieid = movies_metadata.id where movies_metadata.title = """+titulo)
     resposta = cursor.fetchall()
+    aux = str(resposta.pop())
+    ajuda = aux.split("'")
     print("Querie correu bem")
     conn.close()
-    return resposta
+    return (ajuda[1])
 
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return {'hello': 'world Rating'}
 		
-class Movie(Resource):
-    def get(self,year,streamPlat):
-        return read(year,streamPlat)		
+class Ratings(Resource):
+    def get(self,title):
+        return read(title)		
 
 api.add_resource(HelloWorld, '/')
-api.add_resource(Movie,'/api/movie/<string:year>/<string:streamPlat>/')
+api.add_resource(Ratings,'/api/rating/<string:title>/')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -23,7 +23,6 @@ def default(obj):
     raise TypeError("Object of type '%s' is not JSON serializable" % type(obj).__name__)
 
 def read(title,year):
-    print("TESTE: ")
     db = tcp_connection_engine()
     with db.connect() as conn:
         titulo = "'"+title+"'"

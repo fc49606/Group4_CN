@@ -1,46 +1,46 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 import os
 import sqlalchemy
 import psycopg2
+from decimal import Decimal
+import json
 
 app = Flask(__name__)
 api = Api(app)
 
 db = None
 
-def read(year,streamPlat):
+def default(obj):
+    if isinstance(obj, Decimal):
+        return str(obj)
+    raise TypeError("Object of type '%s' is not JSON serializable" % type(obj).__name__)
 
+def read(title,year):
     conn = psycopg2.connect(
-        database = "movies_streaming_plataform",user = 'postgres', password='root', host='host.docker.internal',port = '5432'
+        database = "movies",user = 'postgres', password='root', host='host.docker.internal',port = '5432'
     )
     cursor = conn.cursor()
-    aux = ""
-    print("TESTE: "+streamPlat)
-    if streamPlat == "netflix":	
-        aux +=" and netflix=1"
-    if streamPlat == "hulu":
-        aux+=" and hulu=1"
-    if streamPlat == "prime_video":
-        aux+=" and prime_video=1"
-    if streamPlat == "disneyplus":
-        aux+=" and disneyplus=1"
-    cursor.execute("""SELECT title from streaming_plataform where year="""+year+aux)
+    titulo = "'"+title+"'"
+    ano = "'"+year+"'"
+    cursor.execute("""SELECT revenue FROM movies_metadata where title="""+titulo+""" and year="""+ano)
     resposta = cursor.fetchall()
+    aux = str(resposta.pop())
+    ajuda = aux.split("'")
     print("Querie correu bem")
     conn.close()
-    return resposta
+    return (ajuda[1])
 
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return {'hello': 'world Revenue'}
 		
-class Movie(Resource):
-    def get(self,year,streamPlat):
-        return read(year,streamPlat)		
+class Revenue(Resource):
+    def get(self,title,year):
+        return read(title,year)		
 
 api.add_resource(HelloWorld, '/')
-api.add_resource(Movie,'/api/movie/<string:year>/<string:streamPlat>/')
+api.add_resource(Revenue,'/api/revenue/<string:title>/<string:year>/')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)

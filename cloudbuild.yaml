@@ -4,4 +4,4 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - 'cd microservice_movies && pip install -r requirements.txt && python testing.py -v'
+  - 'cd microservice_movies && pip install -r requirements.txt && kubectl create -f rating-with-proxy.yaml &&python testing.py -v'

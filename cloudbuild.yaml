@@ -4,4 +4,4 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - 'pip install flask && python testing.py -v'
+  - 'pip install flask && cd microservice_movies && python testing.py -v'

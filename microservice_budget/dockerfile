@@ -10,5 +10,5 @@ WORKDIR $APP_HOME
 COPY . ./
 
 ENTRYPOINT ["python"]
-#CMD ["server.py"]
-CMD ["testing.py"]
+CMD ["server.py"]
+

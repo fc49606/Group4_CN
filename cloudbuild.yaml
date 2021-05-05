@@ -4,7 +4,7 @@ steps:
   secretEnv: ['SERVICE_ACCOUNT']
 availableSecrets:
  secretManager:
-  - versionName: projects/cn2021-kubernetes-colab/secrets/service_account/versions/1
+  - versionName: projects/658220397324/secrets/service_account/versions/1
     env: SERVICE_ACCOUNT
 - name: 'python:3.7-slim'
   id: Test

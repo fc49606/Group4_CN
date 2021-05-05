@@ -1,6 +1,4 @@
 steps:
-- name: 'gcr.io/cloudsql-docker/gce-proxy:1.17'
-  args: ['/cloud_sql_proxy', '-instances=cn2021-kubernetes-colab:europe-west2:cn-database=tcp:5432', '-credential_file=/secrets/service_account.json']
 - name: 'python:3.7-slim'
   id: Test
   entrypoint: /bin/sh

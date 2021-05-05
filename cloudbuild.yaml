@@ -5,6 +5,13 @@ steps:
   args:
   - -c
   - 'cd microservice_movies && pip install -r requirements.txt && python testing.py -v'
+- name: 'gcr.io/cloudsql-docker/gce-proxy:1.17'
+  args: ['/cloud_sql_proxy', '-instances=cn2021-kubernetes-colab:europe-west2:cn-database=tcp:5432', '-credential_file=$$SERVICE_ACCOUNT']
+  secretEnv: ['SERVICE_ACCOUNT']
+availableSecrets:
+ secretManager:
+  - versionName: projects/cn2021-kubernetes-colab/secrets/service_account/versions/1
+    env: 'SERVICE_ACCOUNT'
 
  
  

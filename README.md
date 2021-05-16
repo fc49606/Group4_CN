@@ -22,7 +22,7 @@ Note: this may take a few minutes to complete
 
 This will create all the necessary secrets to allow the connection between the database and the microservices.
  
-## 2.1 - Important note
+### 2.1 - Important note
 
 On every XXX-with-proxy.yaml make sure that you have your project-id and the id of your SQL Database
 

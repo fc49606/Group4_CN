@@ -1,4 +1,4 @@
-flask
+flask==1.1.2
 pg8000==1.19.2
 flask_restful
 connexion

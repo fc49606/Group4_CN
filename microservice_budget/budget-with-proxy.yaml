@@ -14,6 +14,27 @@ spec:
       containers:
       - name: budget-container
         image: eu.gcr.io/cn2021-kubernetes-colab/microservice-budget
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: database
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: host
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.17
         command:

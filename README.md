@@ -38,7 +38,7 @@ To delete the cluster and all the microservices on that cluster as well deleting
     ```./delete_services.sh
     ```
 
-## 4.1 - Delete the dataproc jobs
+### 4.1 - Delete the dataproc jobs
 
 To delete the spark jobs run the line;
 '''gcloud dataproc jobs delete < JOB-ID >

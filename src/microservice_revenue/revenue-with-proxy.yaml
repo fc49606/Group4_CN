@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: revenue
+spec:
+  selector:
+    matchLabels:
+      app: revenue
+  template:
+    metadata:
+      labels:
+        app: revenue
+    spec:
+      containers:
+      - name: revenue-container
+        image: eu.gcr.io/cn2021-kubernetes-colab/microservice-revenue
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: database
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: host
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.17
+        command:
+          - "/cloud_sql_proxy"
+          - "-instances=cn2021-kubernetes-colab:europe-west2:cn-database=tcp:5432"
+          - "-credential_file=/secrets/service_account.json"
+        securityContext:
+          runAsNonRoot: true
+        volumeMounts:
+        - name: volumekey
+          mountPath: /secrets/
+          readOnly: true
+      volumes:
+      - name: volumekey
+        secret:
+          secretName: sa-secret

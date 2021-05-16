@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "cn2021-kubernetes-colab",
+  "private_key_id": "cbed7c476b4a9de19f725bc6406388fe65d3682f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+nfXBdekd+LIr\n0iA6sjmbnowJIui55rgd5BGRQspiPVkFPcqOtD115N24r+ET1LCUXTnHxO+5x13E\nxtOq2HS4kRLSTo69BJV5G1eTYRH3qlWw+1AdAuQMj8EeSej6YwAzTs3Glo1FeffV\nx91V8+zzvS6VmRLvCHW2SQ4NzhGk6VH/chHafMbhinlYz5Ks6RkGdCn1Jwy9K5qe\nXWhPT+gGDk2g7WyQRffgnK9Z0hSKv89+K/8Jmk497Y85OQjFpvet7CElCDmrdQ3+\nx37TuzTBpuf6gYXKytJvogZDrAXG1YVt7tQCEavSa3VQYlXgvcWkVfAfoWp4cRUK\nCfEy0bnJAgMBAAECggEAA9FYGO4Ko24JHrWQenx6In+UOgg39XLSIM8h+iQ5t3cx\nFdjJ+mSDwp1SqR5+RigBYJQjBYXdPORQU97QYhPM93fFLIi924bm+eXHsdnE3I5n\naJCjM+5ZF1aEI94pGDK5abQPWdKttUS4tDbSwqQmP8kVnZHTF9rpUj0eVr2k2Gx6\nMdIcI3CsYw/EM6I4hQuOWODuaaG4jZyT3atnmWjtvmiWIo95BSOnT3ZsckLFxKJj\n4ozTBtUj333u6r1bU/v/qCZhjDMv0KSRIykhaNvF/DRLIp8lUEl1DgnbgYHo96Co\nT5wl1u37Xx8xGO2jzEDLnzJYyPomVzdp79T33+wUjQKBgQD0rarAaxqXGQBtM13Z\nYUp+UzftI/2nEaI/kDbFQtdWo+9PDioD8sguxA2eYZYDdHozyraTXWDReGte6yRd\nsgL8IIjMAZA7+1eTd3ko4juoR+zRD64gg30szncdd62V/TiZ84SjVAEJV007j1mx\nTsrrBXmnD0a0/qUOZiF2E+q/LwKBgQDHb+kHGS0/3eKKfQxu0auYUGCc5bsq5n0r\npzLpGgUyEEKKWBiQUk+1i+94ICJ5CcJJ9HYWlp8UME6oyDIk3d1kaXSh6DsFU9RE\nZszg9wBg/NAF41IZ/VBFk6ZCSOPH1mb8WtjXkumHx7vs40E3fVrAuMRWxR+XSpGk\nabCaTu2YhwKBgCB8Eih7z8rxwdG9uR8MQLSm3cz5M0sEF1NzFSJ5bleNak9HpSJj\nEFrNIrW9ZQpOY48OwdCs3BbTcwXmGCzsXmMU+rSDHKAqDYWBni9kYeFEs1dKSqb8\nbhkNzFi4M+6u8N3Xq+t3Uq/nzFQ1AwZ8XIp5bp5Uc+HB0S4pNxYTLN53AoGATSup\ngLymPLNP6ISQngT1n/9iEvP145jCUHTnBzmxTvjptnx2LMoc28PlCpdsn2c+Tb2R\nQBZSQc6bcUXd2VQcSbFglxG0XNBeL4WTu2z4MY9BszWN3E6fk/yY9ccclIQK35UL\nmQbY5FhOCFC7OIyB5FbaajTmj3UkO/lFg8AMwdsCgYEAmNZDTAokV9s/2NC8ryQn\ndVGZ5rTcnOQSUak6dzMV9jgLEf7F8FHcHdPiWLiKmAYCZwbRzlnqp9ZrCuC3jS8C\nwoaaqgNlqScaM0vE6Hx/hdXFPkE5Rg2EmskuBrFddN8S15RA6fmGNa6+yasIZG3K\n33uSm/4YKfzk0aY2ERg9aQc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "cn-projeto@cn2021-kubernetes-colab.iam.gserviceaccount.com",
+  "client_id": "117478758043897461410",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cn-projeto%40cn2021-kubernetes-colab.iam.gserviceaccount.com"
+}

@@ -36,3 +36,8 @@ cd ..
 kubectl create -f ingress.yaml
 
 kubectl get service
+
+# kubectl autoscale deployment budget --cpu-percent=80 --min=1 --max=5
+# kubectl autoscale deployment movie --cpu-percent=80 --min=1 --max=5
+# kubectl autoscale deployment rating --cpu-percent=80 --min=1 --max=5
+# kubectl autoscale deployment revenue --cpu-percent=80 --min=1 --max=5

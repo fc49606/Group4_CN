@@ -1,6 +1,6 @@
 #gcloud auth login
 
-gcloud container clusters create gk-cluster --num-nodes 3 --machine-type n1-standard-1 --zone europe-west2-b
+gcloud container clusters create gk-cluster --num-nodes 3 --machine-type n1-standard-4 --zone europe-west2-b
 
 cd src
 

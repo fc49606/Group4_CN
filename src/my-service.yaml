@@ -1,0 +1,30 @@
+# my-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  labels:
+    purpose: movie
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"80":"my-backendconfig"}}'
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: movie
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: budget
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: rating
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: revenue
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080

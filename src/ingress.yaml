@@ -1,28 +1,36 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ingress
+  name: cn-group04-ingress
 spec:
   rules:
     - http:
         paths:
-          - path: /movie
+          - path: /movie/*
             backend:
               serviceName: movie
-              servicePort: 8080
-          - path: /rating
-            backend:
-              serviceName: rating
-              servicePort: 8080
-          - path: /revenue
-            backend:
-              serviceName: revenue
-              servicePort: 8080
-          - path: /budget
+              servicePort: 80
+          - path: /budget/*
             backend:
               serviceName: budget
-              servicePort: 8080
+              servicePort: 80
+          - path: /rating/*
+            backend:
+              serviceName: rating
+              servicePort: 80
+          - path: /revenue/*
+            backend:
+              serviceName: revenue
+              servicePort: 80
+          # - path: /numbOfMovies
+          #   backend:
+          #     serviceName: numbOfMovies
+          #     servicePort: 8080
+          # - path: /runtimePlat
+          #   backend:
+          #     serviceName: runtimePlat
+          #     servicePort: 8080
           - path: /
             backend:
               serviceName: movie
-              servicePort: 8080
+              servicePort: 80
